@@ -1,0 +1,13 @@
+@media only screen and (max-width: 600px) {
+  .uploadData {
+    width: 85vw;
+    margin-left: 40px;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .uploadData {
+    width: 72vw;
+    margin-left: 40px;
+  }
+}

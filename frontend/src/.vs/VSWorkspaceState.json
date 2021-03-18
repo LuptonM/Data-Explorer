@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Components",
+    "\\Components\\DataExplorer",
+    "\\Components\\DataExplorer\\AxisLabels",
+    "\\Components\\DataExplorer\\filter",
+    "\\Components\\DataExplorer\\graphSideBar",
+    "\\Components\\DataExplorer\\Title",
+    "\\Components\\UploadData",
+    "\\Functions"
+  ],
+  "SelectedNode": "\\Components\\button.css",
+  "PreviewInSolutionExplorer": false
+}
