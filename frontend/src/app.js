@@ -50,7 +50,7 @@ export default function App() {
 
   useEffect(() => {
     if (filename) {
-      const apiURL = "http://127.0.0.1:5000/columns/".concat(filename);
+      const apiURL = "/columns/".concat(filename);
 
       axios.get(apiURL).then((response) => {
         setColumns(response.data.columns);
@@ -60,7 +60,7 @@ export default function App() {
 
   useEffect(() => {
     if (filename) {
-      const apiURL = "http://127.0.0.1:5000/dataTypes/".concat(filename);
+      const apiURL = "/dataTypes/".concat(filename);
 
       axios.get(apiURL).then((response) => {
         let newTypes = response.data;
@@ -77,7 +77,7 @@ export default function App() {
   useEffect(() => {
     if (filename) {
       const data_response = axios
-        .post("http://127.0.0.1:5000/tableData", {
+        .post("/tableData", {
           filename: filename,
         })
         .then((response) => {

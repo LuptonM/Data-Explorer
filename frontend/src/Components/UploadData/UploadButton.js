@@ -15,7 +15,7 @@ export default function UploadButton({ fileName, onChange }) {
       uploadedFile.append("file", file);
 
       axios
-        .post("http://127.0.0.1:5000/uploadFile", uploadedFile)
+        .post("/uploadFile", uploadedFile)
         .then((response) => {
           if (response.data.message === "upload was a success") {
             onChange(file.name);

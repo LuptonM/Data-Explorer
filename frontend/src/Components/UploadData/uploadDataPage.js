@@ -6,7 +6,7 @@ export default function UploadDataPage({ filename, handleFileChange }) {
   
 
   const changeFile = (newValue) => {
-    setFilename(newValue);
+   
     handleFileChange(newValue);
   };
 
