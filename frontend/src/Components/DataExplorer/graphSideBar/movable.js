@@ -1,6 +1,7 @@
 import React from "react";
 import Moveable from "react-moveable";
 
+//use of the movable library so we can drag and move the graph side bar around
 const Movable = ({ moveRef, setStyle }) => {
   const [renderMovable, settRenderMovable] = React.useState(false);
 

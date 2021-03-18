@@ -13,6 +13,7 @@ import AxisLabel from "./AxisLabels/axisLabel.js";
 import GraphSideBar from "./graphSideBar/graphSideBar.js";
 import GraphMaker from "./graphs/graphMaker.js";
 
+//function that removes an item from an array
 const removeItemFromArray = (item, array) => {
   var index = array.indexOf(item);
   if (index !== -1) {
@@ -21,6 +22,7 @@ const removeItemFromArray = (item, array) => {
   return array;
 };
 
+//function that handles making all items selected or not in an array
 const selectAllFilter = (filterArray, selectAllBoll) => {
   let newFilterArray = [];
 
@@ -33,7 +35,7 @@ const selectAllFilter = (filterArray, selectAllBoll) => {
   });
   return newFilterArray;
 };
-
+//creates a list of distinct filters
 const uniqueFilter = (data, column) => {
   var unique = [];
   var distinctFilter = [];
@@ -45,7 +47,7 @@ const uniqueFilter = (data, column) => {
   }
   return distinctFilter;
 };
-
+//mutates a filter array at a certain value to make it selected or not
 const changeItemSelection = (filterArray, value, selectBool) => {
   let newFilterArray = [];
 
@@ -66,7 +68,7 @@ const changeItemSelection = (filterArray, value, selectBool) => {
   });
   return newFilterArray;
 };
-
+//filters the data for one filter
 const filterData = (data, filter) => {
   let filteredData = [];
 
@@ -90,7 +92,7 @@ const filterData = (data, filter) => {
 
   return filteredData;
 };
-
+//itterates through the filters and filters the data
 const createFilteredData = (data, filters) => {
   let filteredData = [];
   filters.map((filter, i) => {
@@ -230,7 +232,7 @@ export default function DataExplorer({ data, filename }) {
 
     setFilters(filterCopy);
   };
-
+  //handles the selecting of one item in a filter
   const handleSelect = (columnName, index, value, selectBool) => {
     let filterCopy = [];
 
@@ -248,7 +250,7 @@ export default function DataExplorer({ data, filename }) {
 
     setFilters(filterCopy);
   };
-
+  //makes the filtered data - listens to the filter state
   useEffect(() => {
     if (filters.length) {
       setFilteredData(createFilteredData(data, filters));

@@ -4,6 +4,7 @@ import UseOutsideAlerter from "../../../Functions/clickOutside.js";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
+//this is the virtualised component. drop down will break if too many html items are added to the DOM so only those that the user can see are added
 import VirtualScroller from "./VirtualScroller";
 
 export default function DistinctValueSelector({
@@ -23,7 +24,7 @@ export default function DistinctValueSelector({
 
   const FilterDropDown = useRef(null);
 
-  ///to allow filter to appear outside of overflow
+  ///show/hide filter drop down
   const handleShowFilters = (currentState) => {
     if (currentState) {
       setshowFilters(false);
@@ -34,7 +35,7 @@ export default function DistinctValueSelector({
       setArrow(<ExpandLessIcon />);
       setSelectorClass("axisDraggableColumn-active");
 
-      //need to edit css position of
+      //need to edit css position of drop down so it can overcome the overflow of its parent
 
       let buttonWrapper = document.getElementById(
         namespace.concat(column).concat("wrapper")
@@ -60,14 +61,15 @@ export default function DistinctValueSelector({
     handleDraggedItem(namespace.concat(column));
   };
 
-  //settings for virtualised list
-
+  
+  //selects or deselects all objects depending on whether the select all check box is clicked
   const handleSelectAll = (event) => {
     setSelectAll(event.target.checked);
 
     handleFilterSelectAll(column, event.target.checked);
   };
 
+  //settings for virtualised component
   const SETTINGS = {
     itemHeight: 20,
     amount: 8,

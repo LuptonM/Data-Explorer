@@ -8,6 +8,7 @@ import { ReactComponent as PieIcon } from "../graphs/graphIcons/pieChart.svg";
 import { ReactComponent as DoughnutIcon } from "../graphs/graphIcons/dougnutChart.svg";
 import MovableComponent from "./movable.js";
 
+//the item that is mapped later to create a clickable area for each picture of a graph
 const GraphIcon = ({ icon, onClick, index, type, ...rest }) => {
   const handleClickIcon = () => {
     onClick(type);
