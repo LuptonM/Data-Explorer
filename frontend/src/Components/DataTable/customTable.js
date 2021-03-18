@@ -105,7 +105,7 @@ export default function DataTable({ filename, dataTypes, data }) {
   }, [data]);
 
   return (
-    <>
+    <div className="customTable">
       <br />
       {data.length > 0 ? (
         <>
@@ -139,6 +139,6 @@ export default function DataTable({ filename, dataTypes, data }) {
           </button>
         </>
       )}
-    </>
+    </div>
   );
 }

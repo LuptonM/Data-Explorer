@@ -252,3 +252,10 @@ code {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
+
+.uploadData {
+    display: flex;
+    align-content: center;
+    box-sizing: border-box;
+    padding: 20px
+}

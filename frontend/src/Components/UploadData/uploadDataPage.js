@@ -11,8 +11,8 @@ export default function UploadDataPage({ filename, handleFileChange }) {
   };
 
   return (
-    <div>
+    <>
       <UploadButton filename={filename} onChange={changeFile} />
-    </div>
+</>
   );
 }

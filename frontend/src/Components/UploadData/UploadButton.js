@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { DropzoneArea } from "material-ui-dropzone";
-import "./dropZone.css";
+
 
 export default function UploadButton({ fileName, onChange }) {
   const [message, setMessage] = useState("Drag and drop an csv file here");

@@ -1,15 +1,24 @@
+.customTable {
+    box-sizing: border-box;
+    padding: 5px;
+    width:100%;
+   
+   
+}
+
 .styled-table thead tr {
-  background-color: #009879;
-  color: #ffffff;
-  text-align: left;
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
 }
 
 .styled-table {
-  border-collapse: collapse;
-  font-size: 0.9em;
-  font-family: sans-serif;
-  min-width: 400px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    
 }
 
 .styled-table th {
@@ -40,9 +49,10 @@
 }
 
 .tableWrapper {
-  overflow-x: scroll;
-  padding: 10px;
-  width: 100%;
+    padding: 10px;
+    width: 100%;
+    overflow:auto;
+   
 }
 
 .styled-table th,
