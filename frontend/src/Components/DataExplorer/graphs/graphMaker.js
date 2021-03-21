@@ -81,13 +81,14 @@ export default function GraphMaker({
   yaxis,
   yaxisModification,
   colourColumn,
+  sizeColumn,
 }) {
   const [graphData, setGraphData] = useState([]);
   const [graphLabels, setGraphLabels] = useState([]);
   const [graphOptions, setGraphOptions] = useState();
 
   useEffect(() => {
-    if (data.length) {
+   
       setGraphData(
         GenerateGraphData(
           graphType,
@@ -95,11 +96,12 @@ export default function GraphMaker({
           xaxis,
           yaxis,
           yaxisModification,
-          colourColumn
+          colourColumn,
+		  sizeColumn
         )
       );
-    }
-  }, [graphType, data, xaxis, yaxis, yaxisModification, colourColumn]);
+    
+  }, [graphType, data, xaxis, yaxis, yaxisModification, colourColumn, sizeColumn]);
 
   useEffect(() => {
     const ctx = document.getElementById("myChart");
@@ -108,7 +110,7 @@ export default function GraphMaker({
       var myChart = new Chart(ctx, {
         type: determineGraphType(graphType),
         data: graphData,
-        options: generateOptions(graphType, colourColumn),
+        options: generateOptions(graphType, colourColumn, sizeColumn),
       });
 
       return () => myChart.destroy();

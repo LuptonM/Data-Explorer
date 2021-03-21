@@ -63,41 +63,10 @@ def uploadFile():
        filename= request.data.filename      
        return redirect(url_for('uploaded_file', filename=filename) )
    
-@app.route('/columns/<filename>')
-def get_columns(filename):
-    filename = filename.replace(" ", "_")
-    df= pd.read_csv(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-    
-    column_dict ={"columns": list(df.columns)}
-    
-    return column_dict
-    
-@app.route('/dataTypes/<filename>')
-def get_types(filename):
-    filename = filename.replace(" ", "_")
-    df= pd.read_csv(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-    res = df.dtypes.to_frame('dtypes').reset_index()
-    dataTypes = res.set_index('index')['dtypes'].astype(str).to_dict()   
-    return dataTypes
-    
-@app.route('/graph', methods=["POST"])
-def generateGraph():
-    data= request.json
-    
-    x_axis =data["x_axis"]
-    y_axis =data["y_axis"]
-    print(data)
-    x_axisModification="boo"
-    y_axisModification = data["y_axisModification"]
-    filename = data["filename"]
-    filename = filename.replace(" ", "_")
-    graphType = data["graphType"]
-    df=pd.read_csv(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-   # df[y_axis] = pd.to_numeric(df[y_axis],errors='coerce')
-    #df[x_axis] = df[x_axis].to_string()
-    return makeGraphData (df, x_axis, y_axis,x_axisModification, y_axisModification, graphType)
 
-@app.route('/tableData', methods=["POST"])
+
+
+@app.route('/data', methods=["POST"])
 
 def getData():
     data= request.json
@@ -105,8 +74,11 @@ def getData():
     filename = filename.replace(" ", "_")
     df=pd.read_csv(os.path.join(app.config['UPLOAD_FOLDER'],filename))
     df=df.replace({np.nan: None})
+    res = df.dtypes.to_frame('dtypes').reset_index()
+    dataTypes = res.set_index('index')['dtypes'].astype(str).to_dict()   
     df = df.to_dict(orient='records')
-    return jsonify(df )
+    returnObject ={"data":df, "types":dataTypes}
+    return returnObject
     
 
 

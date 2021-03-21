@@ -6,6 +6,8 @@ import { ReactComponent as ScatterIcon } from "../graphs/graphIcons/scatter.svg"
 import { ReactComponent as HistogramIcon } from "../graphs/graphIcons/histogram.svg";
 import { ReactComponent as PieIcon } from "../graphs/graphIcons/pieChart.svg";
 import { ReactComponent as DoughnutIcon } from "../graphs/graphIcons/dougnutChart.svg";
+import { ReactComponent as BubbleIcon } from "../graphs/graphIcons/bubble.svg";
+
 import MovableComponent from "./movable.js";
 
 //the item that is mapped later to create a clickable area for each picture of a graph
@@ -33,10 +35,10 @@ const GraphSideBar = ({ handleGraphType }) => {
     { type: "groupedBar", icon: <GroupedBarIcon /> },
     { type: "line", icon: <LineGraphIcon /> },
     { type: "scatter", icon: <ScatterIcon /> },
-    { type: "histogram", icon: <HistogramIcon /> },
+    { type: "bar", icon: <HistogramIcon /> },
     { type: "pie", icon: <PieIcon /> },
     { type: "doughnut", icon: <DoughnutIcon /> },
-    { type: null, icon: null },
+    { type: "bubble", icon: <BubbleIcon/> },
   ];
 
   return (

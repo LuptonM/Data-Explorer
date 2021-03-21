@@ -6,6 +6,7 @@ import PieChartData from "./makePieData.js";
 import SimpleChart from "./simpleChart.js";
 import ColourChart from "./colourChart.js";
 import ScatterChart from "./scatterChart.js"
+import BubbleChart from "./bubbleChart.js"
 
 export default function GenerateGraphData(
   graphType,
@@ -13,7 +14,8 @@ export default function GenerateGraphData(
   xaxis,
   yaxis,
   yaxisModification,
-  colourColumn
+  colourColumn,
+  sizeColumn
 ) {
   if (graphType === "pie" || graphType === "doughnut") {
     return PieChartData(
@@ -45,6 +47,10 @@ export default function GenerateGraphData(
   }else if (graphType==="scatter"){
   
   return ScatterChart (data, xaxis, yaxis, colourColumn)
+
+  }else if(graphType==="bubble"){
+  
+  return BubbleChart(data,  xaxis, yaxis, yaxisModification, colourColumn, sizeColumn)
 
   }
 }

@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\Components",
-    "\\Components\\DataExplorer\\AxisLabels",
+    "\\Components\\DataExplorer",
+    "\\Components\\DataExplorer\\ColumnList",
     "\\Components\\DataExplorer\\filter",
+    "\\Components\\DataExplorer\\graphs",
     "\\Components\\DataExplorer\\graphSideBar",
-    "\\Components\\DataExplorer\\Title",
-    "\\Components\\DataTable",
-    "\\Components\\Sidebar",
+    "\\Components\\DataExplorer\\Navigation",
     "\\Components\\UploadData",
     "\\Functions"
   ],
-  "SelectedNode": "\\Components\\DataTable\\customTable.js",
+  "SelectedNode": "\\Components\\UploadData",
   "PreviewInSolutionExplorer": false
 }

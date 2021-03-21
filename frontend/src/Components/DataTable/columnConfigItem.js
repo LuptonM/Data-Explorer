@@ -31,6 +31,7 @@ export default function ColumnConfigItem({
   handleShowTypes,
   handleType,
   showTypes,
+  lastItem,
 
   ...rest
 }) {
@@ -56,9 +57,11 @@ export default function ColumnConfigItem({
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef, i, handleShowTypes);
 
+ 
+
   return (
     <>
-      <th>
+      <th >
         <div className="headerContents">
           <span className="tableColumnLabel">
             {column} ({type}){" "}

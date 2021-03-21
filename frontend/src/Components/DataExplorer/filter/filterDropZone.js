@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ReactComponent as FilterIcon } from "../icons/filter.svg";
 import DistinctValueSelector from "./distinctFilter.js";
+import NumericFilter from "./numericFilter.js"
 
 export default function FilterDropZone({
   filters,
@@ -47,6 +48,49 @@ export default function FilterDropZone({
     }
   };
 
+  
+           
+  const renderFilters = () => {
+   return filters.map((filterItem, index, column, type, filter) => {
+   if(filterItem.type==="distinct"){
+   return(
+    <div style={{ paddingBottom: "4px" }}>
+     <DistinctValueSelector
+              key={index}
+               
+                column={column}
+                namespace={namespace}
+                filter={filter}
+               handleFilterSelectAll={handleFilterSelectAll}
+                handleSelect={handleSelect}
+                handleDraggedItem={handleDraggedItem}
+                {...filterItem}
+              />
+   </div>
+   )}else if(filterItem.type==="numeric"){
+   
+   return(
+    <div style={{ paddingBottom: "4px" }}>
+  < NumericFilter
+  key={index}
+               
+                column={column}
+                namespace={namespace}
+                filter={filter}
+               
+                handleDraggedItem={handleDraggedItem}
+                {...filterItem}
+  
+  />
+   </div>
+   )
+
+   }
+   })
+};
+
+
+
   return (
     <div className="filterDropZone">
       <div className="filterIconWrapper">
@@ -60,21 +104,8 @@ export default function FilterDropZone({
         onDragLeave={(e) => handleDragLeave(e)}
       >
         <ul>
-          {filters.map((filterItem, index, column, type, filter) => (
-            <div style={{ paddingBottom: "4px" }}>
-              <DistinctValueSelector
-                key={index}
-                index={index}
-                column={column}
-                namespace={namespace}
-                filter={filter}
-                handleFilterSelectAll={handleFilterSelectAll}
-                handleSelect={handleSelect}
-                handleDraggedItem={handleDraggedItem}
-                {...filterItem}
-              />
-            </div>
-          ))}
+          {renderFilters()}
+		  
         </ul>
       </div>
     </div>

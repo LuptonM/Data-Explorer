@@ -4,23 +4,22 @@ import UseOutsideAlerter from "../../../Functions/clickOutside.js";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
-//this is the virtualised component. drop down will break if too many html items are added to the DOM so only those that the user can see are added
-import VirtualScroller from "./VirtualScroller";
 
-export default function DistinctValueSelector({
+
+export default function NumericFilter({
   column,
   handleDraggedItem,
   namespace,
   filter,
-  handleFilterSelectAll,
-  handleSelect,
+ 
+ 
   ...rest
 }) {
   const [showFilters, setshowFilters] = useState(false);
   const [selectorClass, setSelectorClass] = useState("axisDraggableColumn");
   const [arrow, setArrow] = useState(<ExpandMoreIcon />);
 
-  const [selectAll, setSelectAll] = useState(true);
+ 
 
   const FilterDropDown = useRef(null);
 
@@ -62,40 +61,6 @@ export default function DistinctValueSelector({
   };
 
   
-  //selects or deselects all objects depending on whether the select all check box is clicked
-  const handleSelectAll = (event) => {
-    setSelectAll(event.target.checked);
-
-    handleFilterSelectAll(column, event.target.checked);
-  };
-
-  //settings for virtualised component
-  const SETTINGS = {
-    itemHeight: 20,
-    amount: 8,
-    tolerance: 5,
-    minIndex: 0,
-    maxIndex: filter.length - 1,
-    startIndex: 1,
-  };
-
-  // getData function for virtualised list
-  const getData = (dataframe, offset, limit) => {
-    const data = [];
-    const start = Math.max(SETTINGS.minIndex, offset);
-    const end = Math.min(offset + limit - 1, SETTINGS.maxIndex);
-
-    if (start <= end) {
-      for (let i = start; i <= end; i++) {
-        data.push({
-          index: dataframe[i].index,
-          value: dataframe[i].value,
-          selected: dataframe[i].selected,
-        });
-      }
-    }
-    return data;
-  };
 
   return (
     <div
@@ -117,28 +82,18 @@ export default function DistinctValueSelector({
         className={showFilters ? "FilterDropDown" : "FilterDropDown-hidden"}
         ref={FilterDropDown}
       >
-        <div className="checkBoxWrapper">
-          <label>
-            <input
-			key={"selectAll".concat(column)}
-              type="checkbox"
-              checked={selectAll}
-              onChange={(event) => handleSelectAll(event)}
-            />
-            <span></span>
-            select all
-          </label>
-        </div>
-        <VirtualScroller
-          className="viewport"
-          get={getData}
-          dataframe={filter}
-          settings={SETTINGS}
-          namespace={column.concat(namespace)}
-          handleSelect={handleSelect}
-          column={column}
-        />
-      </div>
+      
+	 
+
+  <div className="numericWrapper">
+  <button className="plusminus" ><span style={{verticalAlign: "middle"}}>-</span></button>
+  <input type="number" className="num" value="0"  />
+  <button class="plusminus"><span style={{verticalAlign: "middle"}}>+</span></button>
+</div>
+
+
+
     </div>
+	</div>
   );
 }

@@ -13,6 +13,66 @@ import AxisLabel from "./AxisLabels/axisLabel.js";
 import GraphSideBar from "./graphSideBar/graphSideBar.js";
 import GraphMaker from "./graphs/graphMaker.js";
 
+
+const minMaxValues =(data, column)=>{
+
+let min;
+let max;
+
+data.map((row, i)=>{
+if(i===0){
+
+min =row[column]
+max =row[column]
+
+}else{
+min = row[column] < min ? row[column]: min
+max = row[column] > max ? row[column]: max
+}
+})
+
+return {minValue: min , maxValue: max, minSelected: min, maxSelected:max}
+
+}
+
+const determineFilterSettings =(type, data, column)=>{
+
+if(type==="distinct"){
+
+return uniqueFilter(data, column)
+}else if(type==="numeric"){
+
+return minMaxValues(data, column)
+}
+}
+
+const determineFilterType=(dataTypes, column)=>{
+
+let type ;
+
+dataTypes.map((row)=>{
+
+if(row.column===column){
+
+type=row.type
+}
+
+})
+
+
+if(type==="float64"||type==="int64"){
+
+return("numeric")
+}
+else if (type==="datetime64"){
+return("datetime")
+}else {
+
+return ("distinct")
+}
+
+}
+
 //function that removes an item from an array
 const removeItemFromArray = (item, array) => {
   var index = array.indexOf(item);
@@ -33,6 +93,7 @@ const selectAllFilter = (filterArray, selectAllBoll) => {
       selected: selectAllBoll,
     });
   });
+
   return newFilterArray;
 };
 //creates a list of distinct filters
@@ -71,7 +132,7 @@ const changeItemSelection = (filterArray, value, selectBool) => {
 //filters the data for one filter
 const filterData = (data, filter) => {
   let filteredData = [];
-
+ 
   if (filter.type === "distinct") {
     let validValues = [];
 
@@ -80,7 +141,7 @@ const filterData = (data, filter) => {
         validValues.push(row.value);
       }
     });
-
+	if(validValues.length){
     let column = filter.column;
 
     data.map((row) => {
@@ -88,24 +149,35 @@ const filterData = (data, filter) => {
         filteredData.push(row);
       }
     });
-  }
+	}else if(filter.type==="numeric"){
+	
+	filteredData= data.filter(data=>data[filter.column] >= filter.filter.minValue).filter(data=>data[filter.column] <= filter.filter.maxValue)
 
+	}
+  }else if(filter.type==="numeric"){
+	
+	filteredData= data.filter(data=>data[filter.column] >= filter.filter.minValue).filter(data=>data[filter.column] <= filter.filter.maxValue)
+	}
+  
   return filteredData;
 };
 //itterates through the filters and filters the data
 const createFilteredData = (data, filters) => {
   let filteredData = [];
+
   filters.map((filter, i) => {
     if (i < 1) {
       filteredData = filterData(data, filter);
+	  
     } else {
       filteredData = filterData(filteredData, filter);
     }
   });
+  
   return filteredData;
 };
 
-export default function DataExplorer({ data, filename }) {
+export default function DataExplorer({ data, filename, dataTypes }) {
   const [columns, setColumns] = useState([]);
   const [childToRemove, setChildToRemove] = useState();
   const [draggedItem, setDraggedItem] = useState();
@@ -158,6 +230,7 @@ export default function DataExplorer({ data, filename }) {
   };
 
   const handleSizeColumn = (newColumn) => {
+  
     setSizeColumn(newColumn);
   };
 
@@ -199,10 +272,13 @@ export default function DataExplorer({ data, filename }) {
         return o["column"] === columnName;
       })
     ) {
+
+	let filterType =determineFilterType(dataTypes,columnName)
+
       let newFilter = {
         column: columnName,
-        type: "distinct",
-        filter: uniqueFilter(data, columnName),
+        type: filterType,
+        filter: determineFilterSettings(filterType, data, columnName),
       };
 
       newFilters.push(newFilter);
@@ -224,7 +300,7 @@ export default function DataExplorer({ data, filename }) {
       } else if (filter.column === columnName) {
         filterCopy.push({
           column: filter.column,
-          type: "",
+          type: filter.type,
           filter: selectAllFilter(filter.filter, selectAllBool),
         });
       }
@@ -253,8 +329,10 @@ export default function DataExplorer({ data, filename }) {
   //makes the filtered data - listens to the filter state
   useEffect(() => {
     if (filters.length) {
+	
       setFilteredData(createFilteredData(data, filters));
     } else {
+	
       setFilteredData(data);
     }
   }, [filters]);
@@ -299,7 +377,7 @@ export default function DataExplorer({ data, filename }) {
           </div>
           <div className="graphTabWrapper" id="graphTabWrapper">
             <div className="GraphSelect"></div>
-            <div className="AdditionalGraphOptions">boo</div>
+            <div className="AdditionalGraphOptions">Placeholder for additional options such as axis ticks etc...</div>
           </div>
         </div>
       </div>
@@ -378,6 +456,7 @@ export default function DataExplorer({ data, filename }) {
                   yaxis={yaxisColumn}
                   yaxisModification={yaxisModification}
                   colourColumn={colourColumn}
+				  sizeColumn={sizeColumn}
                 />
               </div>
             </div>

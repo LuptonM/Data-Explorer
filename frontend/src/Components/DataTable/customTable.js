@@ -79,6 +79,7 @@ function TableHeader(dataTypes) {
                   handleShowTypes={handleShowTypes}
                   handleType={handleType}
                   showTypes={showTypes}
+				  lastItem={columnConfig.length -1}
                   {...columnItem}
                 />
               )
@@ -115,7 +116,7 @@ export default function DataTable({ filename, dataTypes, data }) {
 
           <div className="tableWrapper">
             <table className="styled-table">
-              <tbody>
+              <tbody className="tableBody">
                 <TableHeader dataTypes={dataTypes} />
                 <TableBody
                   data={data.slice(startingIndex, startingIndex + pageSize)}

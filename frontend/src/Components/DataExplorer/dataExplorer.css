@@ -233,7 +233,7 @@
 }
 .Draggable-Columns {
   grid-area: Draggable-Columns;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   max-height: 300px;
   margin-top: 5px;
@@ -510,10 +510,10 @@
 }
 
 .arrow {
-  border: solid black;
+  
   border-width: 0 3px 3px 0;
   display: inline-block;
-  padding: 3px;
+  
 }
 
 .right {
@@ -860,4 +860,65 @@
 
 .item {
   height: 20px;
+}
+
+input {
+    text-align: center;
+    border: 1px solid #6C757D;
+}
+
+    input[type="number"] {
+        -webkit-appearance: textfield !important;
+        -moz-appearance: textfield !important;
+        appearance: textfield !important;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+    }
+
+.numericWrapper {
+    border: 2px #dcd3d3 solid;
+    width: 80px;
+    height: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 15px;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    flex:1
+}
+
+.plusminus {
+    height: 100%;
+    width: 30%;
+    background: white;
+    border: none;
+    font-size: 20px;
+    color: #5f5fce;
+    flex-direction: row;
+    
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    flex: 1
+}
+
+.num {
+    height: 100%;
+    width: 39%;
+    border: none;
+    font-size: 18px;
+    flex-direction: row;
+    
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    flex: 1
 }

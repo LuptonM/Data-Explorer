@@ -44,38 +44,24 @@ export default function App() {
 
   useEffect(() => {
     if (filename) {
-      const apiURL = "/columns/".concat(filename);
-
-      axios.get(apiURL).then((response) => {
-        setColumns(response.data.columns);
-      });
-    }
-  }, [filename]);
-
-  useEffect(() => {
-    if (filename) {
-      const apiURL = "/dataTypes/".concat(filename);
-
-      axios.get(apiURL).then((response) => {
-        let newTypes = response.data;
+      const data_response = axios
+        .post("/data", {
+          filename: filename,
+        })
+        .then((response) => {
+          
+		  console.log(response.data)
+		  setData(response.data.data);
+		
+		let newTypes = response.data.types;
         let arrayTypes = [];
         Object.entries(newTypes).map(([key, value]) => {
           arrayTypes.push({ column: key, type: value });
         });
 
         setTypes(arrayTypes);
-      });
-    }
-  }, [filename]);
 
-  useEffect(() => {
-    if (filename) {
-      const data_response = axios
-        .post("/tableData", {
-          filename: filename,
-        })
-        .then((response) => {
-          setData(response.data);
+		
         });
     }
   }, [filename]);
@@ -96,12 +82,12 @@ export default function App() {
             <UploadDataPage filename={filename} handleFileChange={handleFileChange} />
           </Route>
           <Route exact path="/data">
-            <DataTable dataTypes={dataTypes} filename={filename} data={data} />
+            <DataTable dataTypes={dataTypes} filename={filename} data={data}  />
           </Route>
           
                  
           <Route exact path="/data_explorer">
-            <DataExplorer data={data} filename={filename} />
+            <DataExplorer data={data} filename={filename} dataTypes={dataTypes} />
           </Route>
          
         </Switch>
