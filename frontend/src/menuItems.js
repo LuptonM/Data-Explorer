@@ -18,43 +18,43 @@ const items = [
     name: "data",
     label: "Data",
     icon: <PublishIcon />,
-    arrow: <ExpandMoreIcon />,
+   // arrow: <ExpandMoreIcon />,
     isActive: false,
     showLabel: true,
-    redirect: "/upload_data",
+    redirect: "/data",
     selected: false,
-    items: [
-      {
-        name: "configure",
-        label: "Configure",
-        redirect: "/data",
-        selected: false,
-      },
-      {
-        name: "create_new_columns",
-        label: "Create Columns",
-        redirect: "/create_columns",
-        selected: false,
-      },
-    ],
+   // items: [
+     // {
+     //   name: "configure",
+     //   label: "Configure",
+      //  redirect: "/data",
+     //   selected: false,
+     //},
+     // {
+     //   name: "create_new_columns",
+      //  label: "Create Columns",
+      //  redirect: "/create_columns",
+    //    selected: false,
+     // },
+   // ],
   },
   {
     name: "data_explorer",
     label: "Data Explorer",
     icon: <BarChartIcon />,
-    arrow: <ExpandMoreIcon />,
+   // arrow: <ExpandMoreIcon />,
     isActive: false,
     showLabel: true,
     redirect: "/data_explorer",
     selected: false,
-    items: [
-      {
-        name: "advanced_analytics",
-        label: "Advanced Analytics",
-        redirect: "/draggable",
-        selected: false,
-      },
-    ],
+   // items: [
+    //  {
+     //   name: "advanced_analytics",
+      //  label: "Advanced Analytics",
+      //  redirect: "/draggable",
+      //  selected: false,
+    // // },
+   // ],
   },
 ];
 

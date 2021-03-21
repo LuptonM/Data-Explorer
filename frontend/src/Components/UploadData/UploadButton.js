@@ -4,7 +4,7 @@ import { DropzoneArea } from "material-ui-dropzone";
 
 
 export default function UploadButton({ fileName, onChange }) {
-  const [message, setMessage] = useState("Drag and drop an csv file here");
+  const [message, setMessage] = useState("Drag and drop a csv file here");
   const [open, setOpen] = React.useState(false);
 
   const uploadHandler = (files) => {

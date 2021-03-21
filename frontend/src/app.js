@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
 import UploadDataPage from "./Components/UploadData/uploadDataPage.js";
 import SideBar from "./Components/Sidebar/sidebar.js";
-import HomeIcon from "@material-ui/icons/Home";
-import BarChartIcon from "@material-ui/icons/BarChart";
-import PublishIcon from "@material-ui/icons/Publish";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import CreateColumns from "./Components/CreateColumns/createColumns.js";
+
+
 import AppCurrentWidth from "./Functions/getWidth.js";
 import items from "./menuItems.js";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -99,22 +93,17 @@ export default function App() {
       <div className="content">
         <Switch>
           <Route exact path="/">
-            <div></div>
+            <UploadDataPage filename={filename} handleFileChange={handleFileChange} />
           </Route>
           <Route exact path="/data">
             <DataTable dataTypes={dataTypes} filename={filename} data={data} />
           </Route>
-          <Route exact path="/upload_data">
-            <UploadDataPage filename={filename} handleFileChange={handleFileChange} />
-          </Route>
-          <Route exact path="/configure_data"></Route>
-          <Route exact path="/create_columns">
-            <CreateColumns />
-          </Route>
+          
+                 
           <Route exact path="/data_explorer">
             <DataExplorer data={data} filename={filename} />
           </Route>
-          <Route exact path="/draggable"></Route>
+         
         </Switch>
       </div>
     </div>

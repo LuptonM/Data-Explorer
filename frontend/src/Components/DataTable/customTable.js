@@ -5,7 +5,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ColumnConfigItem from "./columnConfigItem.js";
 import TableBody from "./tableBody.js";
 import "./table.css";
-import "../button.css";
+
 import HelpIcon from "@material-ui/icons/Help";
 import Pagination from "../Pagination/pagination.js";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -105,10 +105,11 @@ export default function DataTable({ filename, dataTypes, data }) {
   }, [data]);
 
   return (
-    <div className="customTable">
-      <br />
+    <>
       {data.length > 0 ? (
         <>
+		<div className="customTable">
+      <br />
           <p>Review and refine the data types</p>
           <br />
 
@@ -128,17 +129,25 @@ export default function DataTable({ filename, dataTypes, data }) {
             pageNeighboursSize={1}
             handlePagination={handlePagination}
           />
+
+		  </div>
         </>
+
+		
       ) : (
         <>
-          <p>Please Upload Data First</p>
-          <br />
-
-          <button>
-            <Link to="/upload_data">Navigate to Data</Link>
-          </button>
+         
+         
+		 <div className="flexColumnWrapper"  >
+		   <div className="flexTextWrapper"  >
+          <div className="button" style={{display:"inline-block"}}>
+            <Link style={{ textDecoration: "none",color:"white"}} to="/">Please upload data first</Link>
+          </div>
+		  </div>
+		  </div>
+		   
         </>
       )}
-    </div>
+  </>
   );
 }
