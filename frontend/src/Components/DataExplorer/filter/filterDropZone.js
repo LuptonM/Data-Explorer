@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ReactComponent as FilterIcon } from "../icons/filter.svg";
 import DistinctValueSelector from "./distinctFilter.js";
-import NumericFilter from "./numericFilter.js"
+import NumericFilter from "./numericFilter.js";
 
 export default function FilterDropZone({
   filters,
@@ -12,6 +12,7 @@ export default function FilterDropZone({
   handleAddFilter,
   handleFilterSelectAll,
   handleSelect,
+  handleNumericFilter,
 }) {
   const handleDragOver = (event) => {
     event.preventDefault();
@@ -48,48 +49,40 @@ export default function FilterDropZone({
     }
   };
 
-  
-           
   const renderFilters = () => {
-   return filters.map((filterItem, index, column, type, filter) => {
-   if(filterItem.type==="distinct"){
-   return(
-    <div style={{ paddingBottom: "4px" }}>
-     <DistinctValueSelector
+    return filters.map((filterItem, index, column, type, filter) => {
+      if (filterItem.type === "distinct") {
+        return (
+          <div style={{ paddingBottom: "4px" }}>
+            <DistinctValueSelector
               key={index}
-               
-                column={column}
-                namespace={namespace}
-                filter={filter}
-               handleFilterSelectAll={handleFilterSelectAll}
-                handleSelect={handleSelect}
-                handleDraggedItem={handleDraggedItem}
-                {...filterItem}
-              />
-   </div>
-   )}else if(filterItem.type==="numeric"){
-   
-   return(
-    <div style={{ paddingBottom: "4px" }}>
-  < NumericFilter
-  key={index}
-               
-                column={column}
-                namespace={namespace}
-                filter={filter}
-               
-                handleDraggedItem={handleDraggedItem}
-                {...filterItem}
-  
-  />
-   </div>
-   )
-
-   }
-   })
-};
-
-
+              column={column}
+              namespace={namespace}
+              filter={filter}
+              handleFilterSelectAll={handleFilterSelectAll}
+              handleSelect={handleSelect}
+              handleDraggedItem={handleDraggedItem}
+              {...filterItem}
+            />
+          </div>
+        );
+      } else if (filterItem.type === "numeric") {
+        return (
+          <div style={{ paddingBottom: "4px" }}>
+            <NumericFilter
+              key={index}
+              column={column}
+              namespace={namespace}
+              filter={filter}
+              handleDraggedItem={handleDraggedItem}
+			  handleNumericFilter={handleNumericFilter}
+              {...filterItem}
+            />
+          </div>
+        );
+      }
+    });
+  };
 
   return (
     <div className="filterDropZone">
@@ -103,10 +96,7 @@ export default function FilterDropZone({
         onDrop={(e) => handleDrop(e)}
         onDragLeave={(e) => handleDragLeave(e)}
       >
-        <ul>
-          {renderFilters()}
-		  
-        </ul>
+        <ul>{renderFilters()}</ul>
       </div>
     </div>
   );

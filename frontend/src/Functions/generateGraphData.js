@@ -5,8 +5,8 @@ import PieChartData from "./makePieData.js";
 
 import SimpleChart from "./simpleChart.js";
 import ColourChart from "./colourChart.js";
-import ScatterChart from "./scatterChart.js"
-import BubbleChart from "./bubbleChart.js"
+import ScatterChart from "./scatterChart.js";
+import BubbleChart from "./bubbleChart.js";
 
 export default function GenerateGraphData(
   graphType,
@@ -44,13 +44,16 @@ export default function GenerateGraphData(
     graphType === "groupedBar"
   ) {
     return SimpleChart(data, graphType, xaxis, yaxis, yaxisModification);
-  }else if (graphType==="scatter"){
-  
-  return ScatterChart (data, xaxis, yaxis, colourColumn)
-
-  }else if(graphType==="bubble"){
-  
-  return BubbleChart(data,  xaxis, yaxis, yaxisModification, colourColumn, sizeColumn)
-
+  } else if (graphType === "scatter") {
+    return ScatterChart(data, xaxis, yaxis, colourColumn);
+  } else if (graphType === "bubble") {
+    return BubbleChart(
+      data,
+      xaxis,
+      yaxis,
+      yaxisModification,
+      colourColumn,
+      sizeColumn
+    );
   }
 }

@@ -57,34 +57,34 @@ export default function ColumnConfigItem({
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef, i, handleShowTypes);
 
- 
+  //removed drop down content for now
+
+  //<span className="arrow" onClick={() => handleClick(i)}>
+  //      {" "}
+  //     {arrow}
+  //   </span>
+  //  </div>
+  //{showTypes ? (
+  // <div key={i} className="dropDown" ref={wrapperRef}>
+  // {dataTypes.map((item, j) => {
+  //  return (
+  //   <div className="dropDownWrapper" key={j}>
+  //    {" "}
+  // <p key={item} onClick={(event) => handleSelect(event, i)}>
+  // {item}
+  // </p>
+  // </div>
+  // );
+  // })}
 
   return (
     <>
-      <th >
+      <th>
         <div className="headerContents">
           <span className="tableColumnLabel">
-            {column} ({type}){" "}
-          </span>
-          <span className="arrow" onClick={() => handleClick(i)}>
-            {" "}
-            {arrow}
+            {column} ({type})
           </span>
         </div>
-        {showTypes ? (
-          <div key={i} className="dropDown" ref={wrapperRef}>
-            {dataTypes.map((item, j) => {
-              return (
-                <div className="dropDownWrapper" key={j}>
-                  {" "}
-                  <p key={item} onClick={(event) => handleSelect(event, i)}>
-                    {item}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        ) : null}
       </th>
     </>
   );

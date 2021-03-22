@@ -510,10 +510,8 @@
 }
 
 .arrow {
-  
   border-width: 0 3px 3px 0;
   display: inline-block;
-  
 }
 
 .right {
@@ -694,7 +692,7 @@
   grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-template-areas: "columnName Arrow";
-  min-width: 150px;
+  min-width: 160px;
 }
 
 .columnName {
@@ -769,7 +767,7 @@
   background-color: #be7ffd;
   color: white;
   padding: 5px;
-  min-width: 150px;
+  min-width: 160px;
   grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-template-areas: "columnName Arrow";
@@ -863,62 +861,61 @@
 }
 
 input {
-    text-align: center;
-    border: 1px solid #6C757D;
+  text-align: center;
+  border: 1px solid #6c757d;
 }
 
-    input[type="number"] {
-        -webkit-appearance: textfield !important;
-        -moz-appearance: textfield !important;
-        appearance: textfield !important;
-    }
+input[type="number"] {
+  -webkit-appearance: textfield !important;
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
 
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-    }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
 
 .numericWrapper {
-    border: 2px #dcd3d3 solid;
-    width: 80px;
-    height: 20px;
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    border-radius: 15px;
-    justify-content: center;
-    justify-items: center;
-    align-content: center;
-    align-items: center;
-    flex:1
+  
+  
+  height: 25px;
+ 
+  padding-top:10px;
+  padding-bottom:10px;
+
+  display: flex;
+  flex-direction: row;
+  
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
+  flex: 1;
 }
 
-.plusminus {
-    height: 100%;
-    width: 30%;
-    background: white;
-    border: none;
-    font-size: 20px;
-    color: #5f5fce;
-    flex-direction: row;
-    
-    justify-content: center;
-    justify-items: center;
-    align-content: center;
-    align-items: center;
-    flex: 1
-}
 
 .num {
     height: 100%;
-    width: 39%;
-    border: none;
+    width: 65px;   
     font-size: 18px;
     flex-direction: row;
-    
     justify-content: center;
     justify-items: center;
     align-content: center;
     align-items: center;
-    flex: 1
+    flex: 1;
+}
+.toWrapper {
+    height: 100%;
+    width: 100%;
+    font-size: 18px;
+   
+    
+    flex: 0.5;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    vertical-align: middle;
+    padding-bottom:2px
 }

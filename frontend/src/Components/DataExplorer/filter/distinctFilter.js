@@ -61,7 +61,6 @@ export default function DistinctValueSelector({
     handleDraggedItem(namespace.concat(column));
   };
 
-  
   //selects or deselects all objects depending on whether the select all check box is clicked
   const handleSelectAll = (event) => {
     setSelectAll(event.target.checked);
@@ -103,7 +102,6 @@ export default function DistinctValueSelector({
       className="filterDraggableColumnWrapper"
       draggable="true"
       onDragStart={(event) => handleDragStart(event, column)}
-	  
     >
       <div className={selectorClass}>
         <div className="columnName">{column}</div>
@@ -120,7 +118,7 @@ export default function DistinctValueSelector({
         <div className="checkBoxWrapper">
           <label>
             <input
-			key={"selectAll".concat(column)}
+              key={"selectAll".concat(column)}
               type="checkbox"
               checked={selectAll}
               onChange={(event) => handleSelectAll(event)}

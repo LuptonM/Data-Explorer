@@ -88,20 +88,26 @@ export default function GraphMaker({
   const [graphOptions, setGraphOptions] = useState();
 
   useEffect(() => {
-   
-      setGraphData(
-        GenerateGraphData(
-          graphType,
-          data,
-          xaxis,
-          yaxis,
-          yaxisModification,
-          colourColumn,
-		  sizeColumn
-        )
-      );
-    
-  }, [graphType, data, xaxis, yaxis, yaxisModification, colourColumn, sizeColumn]);
+    setGraphData(
+      GenerateGraphData(
+        graphType,
+        data,
+        xaxis,
+        yaxis,
+        yaxisModification,
+        colourColumn,
+        sizeColumn
+      )
+    );
+  }, [
+    graphType,
+    data,
+    xaxis,
+    yaxis,
+    yaxisModification,
+    colourColumn,
+    sizeColumn,
+  ]);
 
   useEffect(() => {
     const ctx = document.getElementById("myChart");

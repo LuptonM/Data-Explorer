@@ -38,7 +38,7 @@ const GraphSideBar = ({ handleGraphType }) => {
     { type: "bar", icon: <HistogramIcon /> },
     { type: "pie", icon: <PieIcon /> },
     { type: "doughnut", icon: <DoughnutIcon /> },
-    { type: "bubble", icon: <BubbleIcon/> },
+    { type: "bubble", icon: <BubbleIcon /> },
   ];
 
   return (

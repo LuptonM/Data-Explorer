@@ -1,69 +1,110 @@
 import GroupBy from "./groupBy.js";
-
+import UniqueValues from "./uniqueValues.js";
 import PaletteMaker from "./coloursGenerator.js";
 
-const simpleBubble=(data,
-  
+const simpleBubble = (
+  data,
+
   xaxis,
   yaxis,
   sizeColumn,
-  meanSize) =>{
-  
-  let graphData=[]
-  
-  data.map ( (row)=>{
-  
-  let bubbleSize=sizeColumn? row[sizeColumn]*10/meanSize : 10
+  meanSize
+) => {
+  let graphData = [];
 
+  data.map((row) => {
+    let bubbleSize = sizeColumn ? (row[sizeColumn] * 10) / meanSize : 10;
 
+    graphData.push({ x: row[xaxis], y: row[yaxis], r: bubbleSize });
+  });
 
-  graphData.push({x:row[xaxis], y:row[yaxis], r:bubbleSize})
+  return graphData;
+};
 
-  })
+const colourBubble = (
+  data,
 
-  return graphData
+  xaxis,
+  yaxis,
+  colourColumn,
+  sizeColumn,
+  meanSize
+) => {
+  let graphData = [];
+  let colourValues = UniqueValues(data, colourColumn);
+  let backgroundColors = PaletteMaker(colourValues.length);
 
-  }
+  colourValues.map((colour, i) => {
+    //mapping data
+    let colourData = [];
+    data.map((row) => {
+      if (row[colourColumn] === colour) {
+        let bubbleSize = sizeColumn ? (row[sizeColumn] * 10) / meanSize : 10;
 
-const meanColumnAdjustment =(data, column)=>{
+        colourData.push({ x: row[xaxis], y: row[yaxis], r: bubbleSize });
+      }
+    });
+    //end of map data
 
-let sum=0;
+    graphData.push({
+      label: colour,
+      data: colourData,
+      backgroundColor: backgroundColors[i],
+      hoverBackgroundColor: backgroundColors[i],
+    });
+  });
+  return graphData;
+};
 
-data.map((row, i)=>{
+const meanColumnAdjustment = (data, column) => {
+  let sum = 0;
 
+  data.map((row, i) => {
+    if (row[column]) {
+      sum += row[column];
+    }
+  });
 
-if(row[column]){
-
-sum+= row[column]
-}
-}
-)
-
-return (sum/data.length)
-}
+  return sum / data.length;
+};
 
 export default function BubbleChart(
   data,
-   xaxis,
+  xaxis,
   yaxis,
   yaxisModification,
   colourColumn,
   sizeColumn
 ) {
-  
+  const meanValue = sizeColumn ? meanColumnAdjustment(data, sizeColumn) : null;
+  let graphData = [];
+  let datasets = [];
 
-  const meanValue=sizeColumn? meanColumnAdjustment (data, sizeColumn):null
+  if (!colourColumn) {
+    graphData = simpleBubble(data, xaxis, yaxis, sizeColumn, meanValue);
 
- let graphData= simpleBubble(data,xaxis,
-  yaxis,
-  sizeColumn,
- meanValue)
+    datasets = [
+      {
+        label: xaxis,
+        data: graphData,
+        backgroundColor: "#ff6384",
+        hoverBackgroundColor: "#ff6384",
+      },
+    ];
+  } else {
+    graphData = colourBubble(
+      data,
+      xaxis,
+      yaxis,
+      colourColumn,
+      sizeColumn,
+      meanValue
+    );
 
-let datasets =[ {label: xaxis, data: graphData ,backgroundColor:"#ff6384",
-        hoverBackgroundColor: "#ff6384"}]
-  
+    datasets = graphData;
 
+    console.log(datasets);
+  }
 
-  
-  return {datasets: datasets };
+  return { datasets: datasets };
 }

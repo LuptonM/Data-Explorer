@@ -1,27 +1,36 @@
 import React, { useState, useEffect, useRef } from "react";
 import UseOutsideAlerter from "../../../Functions/clickOutside.js";
-
+import NumericInput from 'react-numeric-input';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-
-
 
 export default function NumericFilter({
   column,
   handleDraggedItem,
   namespace,
   filter,
- 
- 
+  handleNumericFilter,
+
   ...rest
 }) {
   const [showFilters, setshowFilters] = useState(false);
   const [selectorClass, setSelectorClass] = useState("axisDraggableColumn");
   const [arrow, setArrow] = useState(<ExpandMoreIcon />);
-
- 
-
+  const [minValue, setMinValue] =useState(filter.minValue)
+  const [maxValue, setMaxValue] =useState(filter.maxValue)
   const FilterDropDown = useRef(null);
+
+  //handle value updates
+
+ const  handleMax=(value)=> {
+    setMaxValue(value)
+	handleNumericFilter(column,value, "max")
+  }
+
+  const  handleMin=(value)=> {
+    setMinValue(value)
+	handleNumericFilter(column,value, "min")
+  }
 
   ///show/hide filter drop down
   const handleShowFilters = (currentState) => {
@@ -60,15 +69,12 @@ export default function NumericFilter({
     handleDraggedItem(namespace.concat(column));
   };
 
-  
-
   return (
     <div
       id={namespace.concat(column).concat("wrapper")}
       className="filterDraggableColumnWrapper"
       draggable="true"
       onDragStart={(event) => handleDragStart(event, column)}
-	  
     >
       <div className={selectorClass}>
         <div className="columnName">{column}</div>
@@ -82,18 +88,13 @@ export default function NumericFilter({
         className={showFilters ? "FilterDropDown" : "FilterDropDown-hidden"}
         ref={FilterDropDown}
       >
-      
-	 
-
-  <div className="numericWrapper">
-  <button className="plusminus" ><span style={{verticalAlign: "middle"}}>-</span></button>
-  <input type="number" className="num" value="0"  />
-  <button class="plusminus"><span style={{verticalAlign: "middle"}}>+</span></button>
-</div>
-
-
-
+        <div className="numericWrapper">
+         
+          <NumericInput className="num" value={minValue} min={filter.minValue} max={filter.maxValue} onChange={(value)=>handleMin(value)} />
+          <div className="toWrapper">to</div>
+		  <NumericInput className="num" value={maxValue} min={filter.minValue} max={filter.maxValue} onChange={(value)=>handleMax(value)}  />
+        </div>
+      </div>
     </div>
-	</div>
   );
 }

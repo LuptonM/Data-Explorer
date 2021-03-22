@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { DropzoneArea } from "material-ui-dropzone";
 
-
 export default function UploadButton({ fileName, onChange }) {
   const [message, setMessage] = useState("Drag and drop a csv file here");
   const [open, setOpen] = React.useState(false);
@@ -14,15 +13,13 @@ export default function UploadButton({ fileName, onChange }) {
 
       uploadedFile.append("file", file);
 
-      axios
-        .post("/uploadFile", uploadedFile)
-        .then((response) => {
-          if (response.data.message === "upload was a success") {
-            onChange(file.name);
-          }
+      axios.post("/uploadFile", uploadedFile).then((response) => {
+        if (response.data.message === "upload was a success") {
+          onChange(file.name);
+        }
 
-          setMessage(file.name);
-        });
+        setMessage(file.name);
+      });
     }
   };
 

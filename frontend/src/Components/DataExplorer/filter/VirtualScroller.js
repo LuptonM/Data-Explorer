@@ -128,13 +128,13 @@ class Scroller extends Component {
         style={{ height: viewportHeight }}
       >
         <div style={{ height: topPaddingHeight }} />
-        {data.map((row,i) => {
+        {data.map((row, i) => {
           return (
             <CheckBoxTemplate
               item={row}
               handleSelect={this.props.handleSelect}
               column={this.props.column}
-			  key={i}
+              key={i}
             />
           );
         })}

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import UploadDataPage from "./Components/UploadData/uploadDataPage.js";
 import SideBar from "./Components/Sidebar/sidebar.js";
 
-
 import AppCurrentWidth from "./Functions/getWidth.js";
 import items from "./menuItems.js";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -49,19 +48,16 @@ export default function App() {
           filename: filename,
         })
         .then((response) => {
-          
-		  console.log(response.data)
-		  setData(response.data.data);
-		
-		let newTypes = response.data.types;
-        let arrayTypes = [];
-        Object.entries(newTypes).map(([key, value]) => {
-          arrayTypes.push({ column: key, type: value });
-        });
+          console.log(response.data);
+          setData(response.data.data);
 
-        setTypes(arrayTypes);
+          let newTypes = response.data.types;
+          let arrayTypes = [];
+          Object.entries(newTypes).map(([key, value]) => {
+            arrayTypes.push({ column: key, type: value });
+          });
 
-		
+          setTypes(arrayTypes);
         });
     }
   }, [filename]);
@@ -79,17 +75,22 @@ export default function App() {
       <div className="content">
         <Switch>
           <Route exact path="/">
-            <UploadDataPage filename={filename} handleFileChange={handleFileChange} />
+            <UploadDataPage
+              filename={filename}
+              handleFileChange={handleFileChange}
+            />
           </Route>
           <Route exact path="/data">
-            <DataTable dataTypes={dataTypes} filename={filename} data={data}  />
+            <DataTable dataTypes={dataTypes} filename={filename} data={data} />
           </Route>
-          
-                 
+
           <Route exact path="/data_explorer">
-            <DataExplorer data={data} filename={filename} dataTypes={dataTypes} />
+            <DataExplorer
+              data={data}
+              filename={filename}
+              dataTypes={dataTypes}
+            />
           </Route>
-         
         </Switch>
       </div>
     </div>

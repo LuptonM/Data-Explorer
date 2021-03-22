@@ -1,47 +1,53 @@
 .customTable {
-    box-sizing: border-box;
-    padding: 5px;
-    width:100%;
-   
-   
+  box-sizing: border-box;
+  padding: 5px;
+  width: 100%;
 }
 
-.tableBody{
-
-    border-radius:20px
+.tableBody {
+  border-radius: 20px;
 }
 
 .styled-table thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
 }
 
 .styled-table {
-    border-collapse: collapse;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    
-    border-radius:20px
-    
+  border-collapse: collapse;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+
+  border-radius: 20px;
 }
 
-    .styled-table th {
-        background-color: #be7ffd;
-        color: white;
-        position: relative;
-    }
-
-thead:first-child tr:first-child th:first-child, tbody:first-child tr:first-child td:first-child {
-    border-radius: 4px 0 0 0;
+.styled-table th {
+  background-color: #be7ffd;
+  color: white;
+  position: relative;
 }
 
-thead:last-child tr:last-child th:first-child, tbody:last-child tr:last-child td:first-child {
-    border-radius: 0 0 0 4px;
+/* top-left border-radius */
+table tr:first-child th:first-child {
+  border-top-left-radius: 15px;
 }
 
+/* top-right border-radius */
+table tr:first-child th:last-child {
+  border-top-right-radius: 15px;
+}
 
+/* bottom-left border-radius */
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 15px;
+}
+
+/* bottom-right border-radius */
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 15px;
+}
 
 .arrow {
   position: relative;
@@ -66,10 +72,9 @@ thead:last-child tr:last-child th:first-child, tbody:last-child tr:last-child td
 }
 
 .tableWrapper {
-    padding: 10px;
-    width: 100%;
-    overflow:auto;
-   
+  padding: 10px;
+  width: 100%;
+  overflow: auto;
 }
 
 .styled-table th,
@@ -106,5 +111,5 @@ thead:last-child tr:last-child th:first-child, tbody:last-child tr:last-child td
 }
 
 .styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  border-bottom: 0px solid white;
 }

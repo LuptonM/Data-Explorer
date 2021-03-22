@@ -13,65 +13,73 @@ import AxisLabel from "./AxisLabels/axisLabel.js";
 import GraphSideBar from "./graphSideBar/graphSideBar.js";
 import GraphMaker from "./graphs/graphMaker.js";
 
+const minMaxValues = (data, column) => {
+  let min;
+  let max;
 
-const minMaxValues =(data, column)=>{
+  data.map((row, i) => {
+    if (i === 0) {
+      min = row[column];
+      max = row[column];
+    } else {
+      min = row[column] < min ? row[column] : min;
+      max = row[column] > max ? row[column] : max;
+    }
+  });
 
-let min;
-let max;
+  return { minValue: min, maxValue: max, minSelected: min, maxSelected: max };
+};
 
-data.map((row, i)=>{
-if(i===0){
+const changeMinMax=(filter, value, boundary)=>{
 
-min =row[column]
-max =row[column]
+let newFilter=filter;
+
+if(boundary==="min"){
+
+newFilter.minSelected=value;
+
+return(newFilter)
+
+
+}else if(boundary==="max"){
+
+newFilter.maxSelected=value;
+
+return(newFilter)
 
 }else{
-min = row[column] < min ? row[column]: min
-max = row[column] > max ? row[column]: max
-}
-})
 
-return {minValue: min , maxValue: max, minSelected: min, maxSelected:max}
-
-}
-
-const determineFilterSettings =(type, data, column)=>{
-
-if(type==="distinct"){
-
-return uniqueFilter(data, column)
-}else if(type==="numeric"){
-
-return minMaxValues(data, column)
-}
-}
-
-const determineFilterType=(dataTypes, column)=>{
-
-let type ;
-
-dataTypes.map((row)=>{
-
-if(row.column===column){
-
-type=row.type
-}
-
-})
-
-
-if(type==="float64"||type==="int64"){
-
-return("numeric")
-}
-else if (type==="datetime64"){
-return("datetime")
-}else {
-
-return ("distinct")
+return filter
 }
 
 }
+
+
+const determineFilterSettings = (type, data, column) => {
+  if (type === "distinct") {
+    return uniqueFilter(data, column);
+  } else if (type === "numeric") {
+    return minMaxValues(data, column);
+  }
+};
+
+const determineFilterType = (dataTypes, column) => {
+  let type;
+
+  dataTypes.map((row) => {
+    if (row.column === column) {
+      type = row.type;
+    }
+  });
+
+  if (type === "float64" || type === "int64") {
+    return "numeric";
+  } else if (type === "datetime64") {
+    return "datetime";
+  } else {
+    return "distinct";
+  }
+};
 
 //function that removes an item from an array
 const removeItemFromArray = (item, array) => {
@@ -132,7 +140,7 @@ const changeItemSelection = (filterArray, value, selectBool) => {
 //filters the data for one filter
 const filterData = (data, filter) => {
   let filteredData = [];
- 
+
   if (filter.type === "distinct") {
     let validValues = [];
 
@@ -141,24 +149,21 @@ const filterData = (data, filter) => {
         validValues.push(row.value);
       }
     });
-	if(validValues.length){
-    let column = filter.column;
+    if (validValues.length) {
+      let column = filter.column;
 
-    data.map((row) => {
-      if (validValues.includes(row[column])) {
-        filteredData.push(row);
-      }
-    });
-	}else if(filter.type==="numeric"){
-	
-	filteredData= data.filter(data=>data[filter.column] >= filter.filter.minValue).filter(data=>data[filter.column] <= filter.filter.maxValue)
+      data.map((row) => {
+        if (validValues.includes(row[column])) {
+          filteredData.push(row);
+        }
+      });
+    } 
+  } else if (filter.type === "numeric") {
+    filteredData = data
+      .filter((data) => data[filter.column] >= filter.filter.minSelected)
+      .filter((data) => data[filter.column] <= filter.filter.maxSelected);
+  }
 
-	}
-  }else if(filter.type==="numeric"){
-	
-	filteredData= data.filter(data=>data[filter.column] >= filter.filter.minValue).filter(data=>data[filter.column] <= filter.filter.maxValue)
-	}
-  
   return filteredData;
 };
 //itterates through the filters and filters the data
@@ -168,14 +173,15 @@ const createFilteredData = (data, filters) => {
   filters.map((filter, i) => {
     if (i < 1) {
       filteredData = filterData(data, filter);
-	  
     } else {
       filteredData = filterData(filteredData, filter);
     }
   });
-  
+
   return filteredData;
 };
+
+
 
 export default function DataExplorer({ data, filename, dataTypes }) {
   const [columns, setColumns] = useState([]);
@@ -230,7 +236,6 @@ export default function DataExplorer({ data, filename, dataTypes }) {
   };
 
   const handleSizeColumn = (newColumn) => {
-  
     setSizeColumn(newColumn);
   };
 
@@ -272,8 +277,7 @@ export default function DataExplorer({ data, filename, dataTypes }) {
         return o["column"] === columnName;
       })
     ) {
-
-	let filterType =determineFilterType(dataTypes,columnName)
+      let filterType = determineFilterType(dataTypes, columnName);
 
       let newFilter = {
         column: columnName,
@@ -326,13 +330,36 @@ export default function DataExplorer({ data, filename, dataTypes }) {
 
     setFilters(filterCopy);
   };
+
+  //reacts to changes in min/max of numeric filters
+  const handleNumericFilter=(columnName, value,boundary )=>{
+   let filterCopy = [];
+
+    filters.map((filter, i) => {
+      if (filter.column !== columnName) {
+        filterCopy.push(filter);
+      } else if (filter.column === columnName) {
+	  
+        filterCopy.push({
+          column: filter.column,
+          type: filter.type,
+          filter: changeMinMax(filter.filter, value, boundary),
+        });
+		
+      }
+    });
+	console.log(filterCopy)
+    setFilters(filterCopy);
+
+
+
+  }
+
   //makes the filtered data - listens to the filter state
   useEffect(() => {
     if (filters.length) {
-	
       setFilteredData(createFilteredData(data, filters));
     } else {
-	
       setFilteredData(data);
     }
   }, [filters]);
@@ -377,7 +404,9 @@ export default function DataExplorer({ data, filename, dataTypes }) {
           </div>
           <div className="graphTabWrapper" id="graphTabWrapper">
             <div className="GraphSelect"></div>
-            <div className="AdditionalGraphOptions">Placeholder for additional options such as axis ticks etc...</div>
+            <div className="AdditionalGraphOptions">
+              Placeholder for additional options such as axis ticks etc...
+            </div>
           </div>
         </div>
       </div>
@@ -395,6 +424,7 @@ export default function DataExplorer({ data, filename, dataTypes }) {
                   namespace="filter"
                   handleFilterSelectAll={handleFilterSelectAll}
                   handleSelect={handleSelect}
+				  handleNumericFilter={handleNumericFilter}
                 />
               </div>
               <div className="AxisZone">
@@ -456,7 +486,7 @@ export default function DataExplorer({ data, filename, dataTypes }) {
                   yaxis={yaxisColumn}
                   yaxisModification={yaxisModification}
                   colourColumn={colourColumn}
-				  sizeColumn={sizeColumn}
+                  sizeColumn={sizeColumn}
                 />
               </div>
             </div>

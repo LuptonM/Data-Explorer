@@ -252,13 +252,17 @@ export default function Sidebar({
   return (
     <div className={sidebarClass}>
       <div className="sidebar_header">
-      
-          <MenuIcon onClick={toggleMenu} style={{display:"inline-block", marginBottom:"-4px", cursor:"pointer"}} />
-      
+        <MenuIcon
+          onClick={toggleMenu}
+          style={{
+            display: "inline-block",
+            marginBottom: "-4px",
+            cursor: "pointer",
+          }}
+        />
+
         {showmenu ? (
-          <div style={{display:"inline-block"}}>
-            Data Explorer
-         </div>
+          <div style={{ display: "inline-block" }}>Data Explorer</div>
         ) : null}
       </div>
 

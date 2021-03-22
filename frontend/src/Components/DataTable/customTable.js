@@ -79,7 +79,7 @@ function TableHeader(dataTypes) {
                   handleShowTypes={handleShowTypes}
                   handleType={handleType}
                   showTypes={showTypes}
-				  lastItem={columnConfig.length -1}
+                  lastItem={columnConfig.length - 1}
                   {...columnItem}
                 />
               )
@@ -109,46 +109,41 @@ export default function DataTable({ filename, dataTypes, data }) {
     <>
       {data.length > 0 ? (
         <>
-		<div className="customTable">
-      <br />
-          <p>Review and refine the data types</p>
-          <br />
+          <div className="customTable">
+            <br />
+            <p style={{ paddingLeft: "10px" }}>Data Preview</p>
 
-          <div className="tableWrapper">
-            <table className="styled-table">
-              <tbody className="tableBody">
-                <TableHeader dataTypes={dataTypes} />
-                <TableBody
-                  data={data.slice(startingIndex, startingIndex + pageSize)}
-                />
-              </tbody>
-            </table>
+            <div className="tableWrapper">
+              <table className="styled-table">
+                <tbody className="tableBody">
+                  <TableHeader dataTypes={dataTypes} />
+                  <TableBody
+                    data={data.slice(startingIndex, startingIndex + pageSize)}
+                  />
+                </tbody>
+              </table>
+            </div>
+            <Pagination
+              totalRecords={totalRecords}
+              pageSize={5}
+              pageNeighboursSize={1}
+              handlePagination={handlePagination}
+            />
           </div>
-          <Pagination
-            totalRecords={totalRecords}
-            pageSize={5}
-            pageNeighboursSize={1}
-            handlePagination={handlePagination}
-          />
-
-		  </div>
         </>
-
-		
       ) : (
         <>
-         
-         
-		 <div className="flexColumnWrapper"  >
-		   <div className="flexTextWrapper"  >
-          <div className="button" style={{display:"inline-block"}}>
-            <Link style={{ textDecoration: "none",color:"white"}} to="/">Please upload data first</Link>
+          <div className="flexColumnWrapper">
+            <div className="flexTextWrapper">
+              <div className="button" style={{ display: "inline-block" }}>
+                <Link style={{ textDecoration: "none", color: "white" }} to="/">
+                  Please upload data first
+                </Link>
+              </div>
+            </div>
           </div>
-		  </div>
-		  </div>
-		   
         </>
       )}
-  </>
+    </>
   );
 }

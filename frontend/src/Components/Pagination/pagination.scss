@@ -48,7 +48,7 @@ $cyan-a200: #18ffff;
     &:after {
       content: "click";
       color: #fff;
-      background-image: linear-gradient(135deg, $blue-900-dark, $lightBlue-900);
+      background-image: linear-gradient(135deg, #9e9e9e, #dcdada);
       transition-delay: 0.25s;
       transform: translateY(100px);
     }

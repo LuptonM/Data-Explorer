@@ -3,14 +3,14 @@
     "",
     "\\Components",
     "\\Components\\DataExplorer",
-    "\\Components\\DataExplorer\\ColumnList",
-    "\\Components\\DataExplorer\\filter",
     "\\Components\\DataExplorer\\graphs",
     "\\Components\\DataExplorer\\graphSideBar",
     "\\Components\\DataExplorer\\Navigation",
+    "\\Components\\DataTable",
+    "\\Components\\Pagination",
     "\\Components\\UploadData",
     "\\Functions"
   ],
-  "SelectedNode": "\\Components\\UploadData",
+  "SelectedNode": "\\Components\\DataExplorer\\filter\\numericFilter.js",
   "PreviewInSolutionExplorer": false
 }
