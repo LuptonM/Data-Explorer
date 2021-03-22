@@ -5,7 +5,7 @@
 }
 
 .tableBody {
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 .styled-table thead tr {
@@ -20,7 +20,7 @@
   font-family: sans-serif;
   min-width: 400px;
 
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 .styled-table th {
@@ -31,22 +31,22 @@
 
 /* top-left border-radius */
 table tr:first-child th:first-child {
-  border-top-left-radius: 15px;
+  border-top-left-radius: 5px;
 }
 
 /* top-right border-radius */
 table tr:first-child th:last-child {
-  border-top-right-radius: 15px;
+  border-top-right-radius: 5px;
 }
 
 /* bottom-left border-radius */
 table tr:last-child td:first-child {
-  border-bottom-left-radius: 15px;
+  border-bottom-left-radius: 5px;
 }
 
 /* bottom-right border-radius */
 table tr:last-child td:last-child {
-  border-bottom-right-radius: 15px;
+  border-bottom-right-radius: 5px;
 }
 
 .arrow {
@@ -72,9 +72,10 @@ table tr:last-child td:last-child {
 }
 
 .tableWrapper {
-  padding: 10px;
-  width: 100%;
-  overflow: auto;
+    padding: 10px;
+    width: 100%;
+    overflow: auto;
+   max-width:calc(100vw - 300px)
 }
 
 .styled-table th,

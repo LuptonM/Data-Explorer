@@ -92,7 +92,7 @@ function TableHeader(dataTypes) {
 
 export default function DataTable({ filename, dataTypes, data }) {
   const [pageSize, setPageSize] = useState(5);
-  const [totalRecords, setTotalRecords] = useState(0);
+  
   const [startingIndex, setStartingIndex] = useState(0);
 
   const handlePagination = (selectedPage, pageSize) => {
@@ -101,9 +101,7 @@ export default function DataTable({ filename, dataTypes, data }) {
     setStartingIndex(startIndex);
   };
 
-  useEffect(() => {
-    setTotalRecords(data.length);
-  }, [data]);
+  
 
   return (
     <>
@@ -124,7 +122,7 @@ export default function DataTable({ filename, dataTypes, data }) {
               </table>
             </div>
             <Pagination
-              totalRecords={totalRecords}
+              totalRecords={data.length}
               pageSize={5}
               pageNeighboursSize={1}
               handlePagination={handlePagination}

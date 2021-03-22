@@ -72,6 +72,6 @@ export default function ColuredChart(
     }
   });
 
-  console.log(datasets);
+  
   return { labels: labels, datasets: datasets };
 }

@@ -6,7 +6,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import MenuIcon from "@material-ui/icons/Menu";
 import LogoPath from "./logo.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link, useHistory } from "react-router-dom";
+
 import CSSTransition from "react-transition-group/CSSTransitionGroup";
 
 const Logo = <img src={LogoPath} alt="" className="logo" />;
@@ -34,8 +35,15 @@ function SidebarItem({
 
   ...rest
 }) {
+
+const history = useHistory();
+
   const handleSelectItem = ({ parentIndex, index }) => {
     handleSelect({ parentIndex, index });
+	if(redirect){
+	 history.push(redirect);
+	 toggleMenu();
+	 }
   };
 
   const handleClickArrow = (index) => {
@@ -62,7 +70,7 @@ function SidebarItem({
 
   return (
     <>
-      <div className="menuButton" style={{ backgroundColor: color }}>
+      <div className="menuButton" style={{ backgroundColor: color }}  onClick={() => handleSelectItem({ parentIndex, index })} >
         <ListItem
           button
           onClick={() => handleSelectItem({ parentIndex, index })}
@@ -250,7 +258,7 @@ export default function Sidebar({
   }, [isMobile]);
 
   return (
-    <div className={sidebarClass}>
+    <div id="sidebar" className={sidebarClass}>
       <div className="sidebar_header">
         <MenuIcon
           onClick={toggleMenu}

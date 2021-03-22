@@ -461,13 +461,15 @@ export default function DataExplorer({ data, filename, dataTypes }) {
           </div>
           <div className="Graphing-area">
             <div className="graph-container">
-              <div className="Yaxis-Label">
+			<div id="YaxisContainer" className="YaxisContainer">
+			<div className="Yaxis-Label" id="Yaxis-Label">
                 <AxisLabel
                   id="yaxisLabel"
                   placeholder="Yaxis"
                   handleLabel={handleYaxisLabel}
                 />
               </div>
+			  </div>
               <div className="Graph-Title">
                 <GraphTitle handleGraphTitle={handleGraphTitle} />
               </div>

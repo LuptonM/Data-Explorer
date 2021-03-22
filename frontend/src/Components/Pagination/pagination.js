@@ -7,6 +7,8 @@ function range(start, count) {
 }
 
 function getNeighbours(currentPage, pageNeighboursSize, totalPages) {
+  
+ 
   //determine start page
   let startPage;
   //for changing neighbours
@@ -18,6 +20,7 @@ function getNeighbours(currentPage, pageNeighboursSize, totalPages) {
     startPage = i;
   }
 
+ 
   //determine end page
   let endPage;
   //for changing neighbours
@@ -28,7 +31,7 @@ function getNeighbours(currentPage, pageNeighboursSize, totalPages) {
   ) {
     endPage = i;
   }
-
+  
   let pageNos = range(startPage, endPage - startPage + 1);
 
   return pageNos;
@@ -40,17 +43,28 @@ export default function Pagination({
   pageNeighboursSize,
   handlePagination,
 }) {
-  const [totalPages, setTotalPages] = useState(7);
+  const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageOptions, setPageOptions] = useState([1]);
 
+
+    useEffect(() => {
+	if(pageSize){
+	
+	let newTotalPages=Math.ceil(totalRecords / pageSize)
+     setTotalPages(newTotalPages)
+	 
+	 }
+	
+  }, []);
+
+  
   // listens to number of records and page size to determine total number of pages
   useEffect(() => {
     if (totalRecords & pageSize) {
-      setTotalPages(Math.ceil(totalRecords / pageSize));
-    } else {
-      setTotalPages(1);
-    }
+	let newTotalPages=Math.ceil(totalRecords / pageSize)
+      setTotalPages(newTotalPages);
+   }
   }, [totalRecords, pageSize]);
 
   //listens to the current page and pageSize to determine page Neightbours

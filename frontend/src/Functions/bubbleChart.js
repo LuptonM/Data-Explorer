@@ -103,7 +103,7 @@ export default function BubbleChart(
 
     datasets = graphData;
 
-    console.log(datasets);
+    
   }
 
   return { datasets: datasets };
