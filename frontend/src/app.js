@@ -82,7 +82,7 @@ export default function App() {
 
       <div className="content">
         <Switch>
-          <Route exact path="/">
+          <Route exact path="">
             <UploadDataPage
               filename={filename}
               handleFileChange={handleFileChange}
