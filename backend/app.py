@@ -74,6 +74,7 @@ def getData():
     filename = filename.replace(" ", "_")
     df=pd.read_csv(os.path.join(app.config['UPLOAD_FOLDER'],filename))
     df=df.replace({np.nan: None})
+    session["data"]=df
     res = df.dtypes.to_frame('dtypes').reset_index()
     dataTypes = res.set_index('index')['dtypes'].astype(str).to_dict()   
     df = df.to_dict(orient='records')
@@ -86,5 +87,5 @@ def getData():
   
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
-    app.run(debug=True, port=5000)# debug=True restarts the server everytime we make a change in our code,
+    app.run(threaded=True, port=5000)# debug=True restarts the server everytime we make a change in our code,
     
