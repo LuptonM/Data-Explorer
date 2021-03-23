@@ -42,9 +42,17 @@ export default function App() {
   }, [width]);
 
   useEffect(() => {
+   
+    axios.get(`https://datavizualisaton.herokuapp.com/`)
+      .then(res => {
+        console.log(res.data);
+      })
+  }, []);
+
+  useEffect(() => {
     if (filename) {
       const data_response = axios
-        .post("/data", {
+        .post("https://datavizualisaton.herokuapp.com/data", {
           filename: filename,
         })
         .then((response) => {

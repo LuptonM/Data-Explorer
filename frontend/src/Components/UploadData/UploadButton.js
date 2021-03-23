@@ -13,7 +13,7 @@ export default function UploadButton({ fileName, onChange }) {
 
       uploadedFile.append("file", file);
 
-      axios.post("/uploadFile", uploadedFile).then((response) => {
+      axios.post("https://datavizualisaton.herokuapp.com/uploadFile", uploadedFile).then((response) => {
         if (response.data.message === "upload was a success") {
           onChange(file.name);
         }
