@@ -11,7 +11,7 @@ const items = [
     icon: <HomeIcon />,
     isActive: false,
     showLabel: true,
-    redirect: "",
+    redirect: "/",
     selected: true,
   },
   {
